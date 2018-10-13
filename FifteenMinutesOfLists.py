@@ -65,6 +65,21 @@ class Test_TestingLists(unittest.TestCase):
 
         self.assertSequenceEqual(actual, [0, 4, 6, 12, 2, 8, 10])
 
+    def test_ShouldCreateANewListOfTheTenFirstIntegers_When_UsinAComprehensionList(self):
+        actual = [x for x in range(5)]
+
+        self.assertListEqual(actual, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+
+    def test_ShouldCreateANewListWithEvenFiguresFromAList_When_UsingAnInitialListOfTenFiguresAndAComprehensionList(self):
+        initList = [0,3,2,1,1,4,6,9,11,8,5]
+
+        isEven = False
+        if initList[2] % 2 == 0:
+            isEven = True
+
+        actual = [x for x in initList if True]
+
+        self.assertListEqual(actual, [0,2,4,6,8])
 
 if __name__ == "__main__":
     unittest.main()
