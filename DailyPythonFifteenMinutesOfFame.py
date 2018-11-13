@@ -123,6 +123,13 @@ class Test_TestingLists(unittest.TestCase):
 
         self.assertSequenceEqual(actual, ["OK", "NOT A STRING", "NOT A STRING", "NOT A STRING", "PAS OK", "NOT A STRING", "MAYBE"])
 
+    def test_ShouldGenerateAFlatListOfIntegers_When_AListOfListIsProcessed(self):
+        initialList = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+        actual = [1 for sublist in initialList for x in sublist]
+
+        self.assertSequenceEqual(actual, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+
 
 if __name__ == "__main__":
     unittest.main()
