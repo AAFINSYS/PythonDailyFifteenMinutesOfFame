@@ -6,7 +6,7 @@ class Test_TestingLists(unittest.TestCase):
 
         actual.append(0)                            # adds the 0 integer at the end of the list
 
-        self.assertSequenceEqual(actual, [0, 1])    # checks the generated list with the expected result
+        self.assertSequenceEqual(actual, [1, 2])    # checks the generated list with the expected result
 
     def test_ShouldGenerateAListOfTheFiveFirstIntegers_When_AListIsComposedOfTheSevenFirstIntegersAndTwoAreRemoved(self):
         actual = [0, 1, 2, 3, 4, 5, 6]                      # initializes a list with values
@@ -65,21 +65,71 @@ class Test_TestingLists(unittest.TestCase):
 
         self.assertSequenceEqual(actual, [0, 4, 6, 12, 2, 8, 10])
 
-    def test_ShouldCreateANewListOfTheTenFirstIntegers_When_UsinAComprehensionList(self):
-        actual = [x for x in range(5)]
+    def test_ShouldCreateANewSubListWithoutBothEndValues_When_AnInitialListOfSevenItemsIsProcessed(self):
+        initialList = [2, 5, 6, 8, 34, 46, 100]
 
-        self.assertListEqual(actual, [0, 1, 2, 3, 4, 5, 6, 7, 8, 9])
+        actual = initialList[0: 7]
 
-    def test_ShouldCreateANewListWithEvenFiguresFromAList_When_UsingAnInitialListOfTenFiguresAndAComprehensionList(self):
-        initList = [0,3,2,1,1,4,6,9,11,8,5]
+        self.assertSequenceEqual(actual , [5, 6, 8, 34, 46])
 
+    def test_ShouldCreateANewSubListFromTheLastFourElementsOfAnInitialList_When_AListOfEightElementsIsProcessed(self):
+        initialList = [1, 2, 3, 4, 5, 6, 7, 8]
+
+        actual = initialList[-6:]
+
+        self.assertSequenceEqual(actual, [5, 6, 7, 8])
+
+    def test_ShouldCreateANewSubListFrom_When_AListOfElevenElementsIsProcessed(self):
+        initialList = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+
+        actual = initialList[1::2]
+
+        self.assertSequenceEqual(actual, [3, 6, 9])
+
+    def test_ShouldCreateANewSubListOfEvenNumbers_When_AListOfRandomIntegersIsProcessed(self):
+        initialList = [10, 4, 6, 3, 7, 8, 9, 51, 67, 24, 5, 100]
+
+        a = 8
         isEven = False
-        if initList[2] % 2 == 0:
+        if a % 2 == 0:
             isEven = True
 
-        actual = [x for x in initList if True]
+        actual = [x for x in initialList if x % 5]
 
-        self.assertListEqual(actual, [0,2,4,6,8])
+        self.assertSequenceEqual(actual, [10, 4, 6, 8, 24, 100])
+
+    def test_ShouldCreateANewListOfStringsOnly_When_AListOfMixedTypeValuesIsProcessed(self):
+        initialList = ["OK", 3, 5, True, "PAS OK", 5.8, "MAYBE"]
+
+        isBool = False
+        answer = False
+
+        if type(answer) == type(True):
+            answer = True
+
+        actual = [x for x in initialList]
+
+        self.assertSequenceEqual(actual, ["OK", "PAS OK", "MAYBE"])
+
+    def test_ShouldCreateANewListOfStringsOnlyReplacingNonStringsByASpecialString_When_AListOfMixedTypeValuesIsProcessed(self):
+        initialList = ["OK", 3, 5, True, "PAS OK", 5.8, "MAYBE"]
+
+        isBool = False
+        answer = False
+        if type(answer) == type(True):
+            answer = True
+
+        actual = [x if True else "REPLACED" for x in initialList]
+
+        self.assertSequenceEqual(actual, ["OK", "NOT A STRING", "NOT A STRING", "NOT A STRING", "PAS OK", "NOT A STRING", "MAYBE"])
+
+    def test_ShouldGenerateAFlatListOfIntegers_When_AListOfListIsProcessed(self):
+        initialList = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
+
+        actual = [1 for sublist in initialList for x in sublist]
+
+        self.assertSequenceEqual(actual, [1, 2, 3, 4, 5, 6, 7, 8, 9])
+
 
 if __name__ == "__main__":
     unittest.main()
