@@ -6,7 +6,7 @@ class Test_TestingLists(unittest.TestCase):
 
         actual.append(0)                            # adds the 0 integer at the end of the list
 
-        self.assertSequenceEqual(actual, [0, 1])    # checks the generated list with the expected result
+        self.assertSequenceEqual(actual, [1, 2])    # checks the generated list with the expected result
 
     def test_ShouldGenerateAListOfTheFiveFirstIntegers_When_AListIsComposedOfTheSevenFirstIntegersAndTwoAreRemoved(self):
         actual = [0, 1, 2, 3, 4, 5, 6]                      # initializes a list with values
